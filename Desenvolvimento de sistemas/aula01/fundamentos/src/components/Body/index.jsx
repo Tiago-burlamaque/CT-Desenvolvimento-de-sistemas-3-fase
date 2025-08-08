@@ -1,4 +1,5 @@
 import styles from './Body.module.css'
+import Card from './Card'
 
 function Body() {
     const usuarios = [
@@ -24,7 +25,7 @@ function Body() {
    <main className={styles.body}>
         <h2>Usuários cadastros:</h2>
         <div className={styles.cardContainer}>
-
+            <Card />
         </div>
    </main>
   )

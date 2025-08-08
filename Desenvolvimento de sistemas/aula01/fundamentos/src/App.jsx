@@ -1,4 +1,5 @@
 import './App.css'
+import Body from './components/Body';
 import Footer from './components/Footer';
 import Header from './components/Header'
 // Fonts
@@ -9,6 +10,7 @@ function App() {
   return (
     <>
     <Header titulo="Meu Header" />
+    <Body />
     <Footer autor="Criado por Tiago" />
     </>
   )
