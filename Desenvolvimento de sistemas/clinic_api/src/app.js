@@ -1,10 +1,9 @@
-import express from 'express';
+import express, { response } from 'express';
 import { prismaClient } from '../prisma/prisma.js';
 
 const app = express()
 app.use(express.json())
 
-app.listen(3000, ()=> console.log("Api rodando"))
 
 app.get('/usuarios', async (req,res) => {
     try {
@@ -15,3 +14,21 @@ app.get('/usuarios', async (req,res) => {
         console.log(e)
     }
 })
+
+app.get('/usuarios/:id', async(req, res) => {
+    try {
+        const usuario = await prismaClient.usuario.findUnique({
+            where: {
+               id: Number(req.params.id)
+            }
+        })
+        return res.json(usuario)
+        
+    } 
+    
+    catch (e) {
+        console.log(e)
+    }
+})
+
+app.listen(3000, ()=> console.log("Api rodando"))

@@ -21,16 +21,16 @@ async function main() {
             cpf: "154.458.695.45",
             telefone: 54654654,
             email: "joao22@gmail.com",
-            // consultas: {
-            //     create: [
-            //         {
-            //             motivo: "Dor nas costas", 
-            //             data_consulta: new Date("2023-08-25"),
-            //             observacoes: "Ibuprofeno 3 vezes ao dia",
-            //             medico_
-            //         }
-            //     ]
-            // },
+            consultas: {
+                create: [
+                    {
+                        motivo: "Dor nas costas", 
+                        data_consulta: new Date("2023-08-25"),
+                        observacoes: "Ibuprofeno 3 vezes ao dia",
+                        medico_
+                    }
+                ]
+            },
             // exame: {
             //     create: [
             //         {
