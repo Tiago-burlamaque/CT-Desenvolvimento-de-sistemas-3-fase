@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:futlast@127.0.0.1:3306/clinicadb"
+  url      = "mysql://root:senai@127.0.0.1:3306/clinicadb"
 }
 
 // Tabela usuario
@@ -47,7 +47,7 @@ model Paciente {
   id              Int          @id @default(autoincrement())
   nome            String
   cpf             String
-  telefone        Int
+  telefone        String
   email           String
   data_nascimento DateTime
   sexo            String
