@@ -5,7 +5,7 @@ class PacienteController {
     async getTodosPacientes(_,res) {
         try {
             const pacientes = await prismaClient.paciente.findMany();
-            return response.json(pacientes)
+            return res.json(pacientes)
         }
         catch (e) {
             console.log(e)
@@ -19,7 +19,7 @@ class PacienteController {
                     id: Number(params.id)
                 }
             })
-            if (!pacientes) return response.status(404).send("Paciente não existe!")
+            if (!pacientes) return res.status(404).send("Paciente não existe!")
             return response.json(pacientes)
         }
         catch (e) {
@@ -96,6 +96,7 @@ class PacienteController {
         }
     }
     async deletePaciente(req, res) {
+        const params = req
         try {
             const pacienteDeletado = await prismaClient.paciente.delete({
                 where: {

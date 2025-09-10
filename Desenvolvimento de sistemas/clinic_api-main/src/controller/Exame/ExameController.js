@@ -112,3 +112,5 @@ class ExameController {
         }
     }
 }
+
+export const exameController = new ExameController()
