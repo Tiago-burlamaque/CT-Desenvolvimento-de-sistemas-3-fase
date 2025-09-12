@@ -1,11 +1,13 @@
-import Header from "../../layout/Header/Header";
+import React from 'react'
+
 
 const Home = () => {
-    return (
-        <>
-        <Header />
-        <h1>Página home</h1>
-        </>
-    );
+  return (
+    <>
+
+      <h1>Página Home</h1>
+    </>
+  )
 }
-export default Home;
+
+export default Home

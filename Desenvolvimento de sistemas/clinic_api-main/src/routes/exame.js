@@ -10,6 +10,6 @@ exameRouter.get('/exames:id', exameController.getExamePorId)
 
 exameRouter.post('/exames', exameController.postExame)
 
-exameRouter.put('/exames', exameController.putExame)
+exameRouter.put('/exames:id', exameController.putExame)
 
-exameRouter.delete('/exames', exameController.deleteExame)
+exameRouter.delete('/exames:id', exameController.deleteExame)

@@ -5,10 +5,10 @@ export const prontuarioRouter = Router()
 
 prontuarioRouter.get('/prontuarios', prontuarioController.getTodosOsProntuarios)
 
-prontuarioRouter.get('/prontuario', prontuarioController.getProntuarioPorId)
+prontuarioRouter.get('/prontuario:id', prontuarioController.getProntuarioPorId)
 
 prontuarioRouter.post('/prontuario', prontuarioController.postProntuario)
 
-prontuarioRouter.put('/prontuario', prontuarioController.putProntuario)
+prontuarioRouter.put('/prontuario:id', prontuarioController.putProntuario)
 
-prontuarioRouter.delete('/prontuario', prontuarioController.deleteProntuario)
+prontuarioRouter.delete('/prontuario:id', prontuarioController.deleteProntuario)
