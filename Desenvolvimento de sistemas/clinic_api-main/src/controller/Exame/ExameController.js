@@ -1,22 +1,24 @@
-import { prismaClient } from "../../../prisma/prisma.js";
+import { Router } from "express";
+import { prismaClient } from '../../../prisma/prisma.js';
 
 class ExameController {
     constructor() { }
-    async getTodosExames(_, res) {
+
+    async pegarTodosExames(_, res) {
         try {
             const exames = await prismaClient.exame.findMany();
-            return response.json(exames)
+            return res.json(exames)
         }
         catch (e) {
             console.log(e)
         }
     }
-    async getExamePorId(req, res) {
-        const params = req
+
+    async pegarExamePorId(req, res) {
         try {
             const exames = await prismaClient.exame.findUnique({
                 where: {
-                    id: Number(params.id)
+                    id: Number(req.params.id)
                 }
             })
             if (!exames) return res.status(404).send("Exame não existe!")
@@ -26,7 +28,8 @@ class ExameController {
             console.log(e)
         }
     }
-    async postExame(req, res) {
+
+    async criarExame(req, res) {
         try {
             const { body } = req
             const bodyKeys = Object.keys(body)
@@ -48,12 +51,10 @@ class ExameController {
             return res.status(201).json(exames)
         } catch (error) {
             console.error(error)
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar exame: Email já cadastrado!")
-            }
         }
     }
-    async putExame(req, res) {
+
+    async atualizarExame(req, res) {
         try {
             const { body, params } = req
             const bodyKeys = Object.keys(body)
@@ -77,24 +78,21 @@ class ExameController {
                     id: Number(params.id)
                 }
             })
-    
+
             return res.status(201).json({
                 message: "Exame atualizado!",
                 data: exameAtualizado
             })
-    
+
         } catch (error) {
             if (error.code == "P2025") {
                 res.status(404).send("Exame não existe no banco")
             }
-    
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar Exame!")
-            }
         }
     }
-    async deleteExame(req, res) {
-        const params = req
+
+    async deletarExame(req, res) {
+        const { params } = req
         try {
             const exameDeletado = await prismaClient.exame.delete({
                 where: {
@@ -107,7 +105,7 @@ class ExameController {
             })
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("Paciente não existe no banco")
+                res.status(404).send("Exame não existe no banco")
             }
         }
     }

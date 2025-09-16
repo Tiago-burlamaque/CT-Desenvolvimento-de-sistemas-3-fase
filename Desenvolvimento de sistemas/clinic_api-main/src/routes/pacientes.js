@@ -1,15 +1,10 @@
 import { Router } from "express";
-import { pacienteController } from "../controller/Paciente/PacienteController.js";
+import { pacienteController } from "../controller/Paciente/PacienteController.js"
 
-export const pacienteRouter = Router()
+export const pacientesRouter = Router()
 
-pacienteRouter.get('/paciente', pacienteController.getTodosPacientes)
-
-pacienteRouter.get('/paciente:id', pacienteController.getPacientePorId)
-
-pacienteRouter.post('/paciente', pacienteController.postPaciente)
-
-pacienteRouter.put('/paciente:id', pacienteController.putPaciente)
-
-pacienteRouter.delete('/paciente:id', pacienteController.deletePaciente)
-
+pacientesRouter.get("/pacientes", pacienteController.pegarTodosPacientes)
+pacientesRouter.get("/pacientes/:id", pacienteController.pegarPacientePorId)
+pacientesRouter.post("/pacientes", pacienteController.criarPaciente)
+pacientesRouter.put("/pacientes/:id", pacienteController.atualizarPaciente)
+pacientesRouter.delete("/pacientes/:id", pacienteController.deletePaciente)

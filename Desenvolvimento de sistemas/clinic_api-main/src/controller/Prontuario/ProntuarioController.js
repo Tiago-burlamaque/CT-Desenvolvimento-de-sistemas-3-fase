@@ -1,33 +1,35 @@
+// Controller
+
 import { prismaClient } from "../../../prisma/prisma.js";
 
 class ProntuarioController {
     constructor() { }
-    async getTodosOsProntuarios(_, res) {
+
+    async pegarTodosProntuario(_, res) {
         try {
             const prontuarios = await prismaClient.prontuario.findMany();
             return res.json(prontuarios)
-        }
-        catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log(error)
         }
     }
-
-    async getProntuarioPorId(req, res) {
+    async pegarProntuarioPorID(req, res) {
         try {
-            const { params } = req
+            // const { params } = req;
             const prontuario = await prismaClient.prontuario.findUnique({
                 where: {
-                    id: Number(params.id)
+                    id: Number(req.params.id)
                 }
-            })
-            if (!prontuario) return res.status(404).send("Usuário não existe!")
+            });
+            if (!prontuario) {
+                res.status(404).send("Erro ao procurar o prontuario com o id informado")
+            }
             return res.json(prontuario)
-        }
-        catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log(error)
         }
     }
-    async postProntuario(req, res) {
+    async criarProntuario(req, res) {
         try {
             const { body } = req
             const bodyKeys = Object.keys(body)
@@ -35,32 +37,29 @@ class ProntuarioController {
                 if (key !== "descricao" &&
                     key !== "data" &&
                     key !== "medico_responsavel_id" &&
-                    key !== "paciente_id" 
+                    key !== "paciente_id"
                 ) return res.status(404).send("Colunas não existentes")
             }
-            const prontuarios = await prismaClient.prontuario.create({
+            const prontuario = await prismaClient.prontuario.create({
                 data: {
                     ...body,
                     data: new Date(body.data) // corrigir esse cara no put quando nao se manda ele... TO-DO
                 },
             })
-            return res.status(201).json(prontuarios)
+            return res.status(201).json(prontuario)
         } catch (error) {
             console.error(error)
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar paciente: Email já cadastrado!")
-            }
         }
     }
-    async putProntuario(req, res) {
+    async atualizarProntuario(req, res) {
         try {
             const { body, params } = req
             const bodyKeys = Object.keys(body)
             for (const key of bodyKeys) {
                 if (key !== "descricao" &&
                     key !== "data" &&
-                    key !== "medico_responsavel_id" &&
-                    key !== "paciente_id" 
+                    key !== "medico_'responsavel_id" &&
+                    key !== "paciente_id"
                 ) return res.status(404).send("Colunas não existentes")
             }
             await prismaClient.prontuario.update({
@@ -74,23 +73,20 @@ class ProntuarioController {
                     id: Number(params.id)
                 }
             })
-    
+
             return res.status(201).json({
                 message: "Prontuario atualizado!",
                 data: prontuarioAtualizado
             })
-    
+
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("Usuário não existe no banco")
-            }
-    
-            if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
+                res.status(404).send("Prontuario não existe no banco")
             }
         }
     }
-    async deleteProntuario(req, res) {
+    async deletarProntuario(req, res) {
+        const { params } = req
         try {
             const prontuarioDeletado = await prismaClient.prontuario.delete({
                 where: {
@@ -98,15 +94,15 @@ class ProntuarioController {
                 },
             })
             res.status(200).json({
-                message: "Exame deletado!",
+                message: "Prontuario deletado!",
                 data: prontuarioDeletado
             })
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("Paciente não existe no banco")
+                res.status(404).send("Prontuario não existe no banco")
             }
         }
     }
 }
 
-export const prontuarioController = new ProntuarioController();
+export const prontuarioController = new ProntuarioController()

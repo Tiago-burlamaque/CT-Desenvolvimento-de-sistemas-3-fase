@@ -1,14 +1,15 @@
+// Route
 import { Router } from "express";
-import { prismaClient } from "../../prisma/prisma.js";
 import { prontuarioController } from "../controller/Prontuario/ProntuarioController.js";
 export const prontuarioRouter = Router()
 
-prontuarioRouter.get('/prontuarios', prontuarioController.getTodosOsProntuarios)
 
-prontuarioRouter.get('/prontuario:id', prontuarioController.getProntuarioPorId)
+prontuarioRouter.get("/prontuarios", prontuarioController.pegarTodosProntuario)
 
-prontuarioRouter.post('/prontuario', prontuarioController.postProntuario)
+prontuarioRouter.get("/prontuarios/:id", prontuarioController.pegarProntuarioPorID)
 
-prontuarioRouter.put('/prontuario:id', prontuarioController.putProntuario)
+prontuarioRouter.post("/prontuarios", prontuarioController.criarProntuario)
 
-prontuarioRouter.delete('/prontuario:id', prontuarioController.deleteProntuario)
+prontuarioRouter.put("/prontuarios/:id", prontuarioController.atualizarProntuario)
+
+prontuarioRouter.delete("/prontuarios/:id", prontuarioController.deletarProntuario)

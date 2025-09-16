@@ -2,34 +2,39 @@ import { prismaClient } from "../../../prisma/prisma.js";
 
 class PacienteController {
     constructor() { }
-    async getTodosPacientes(_,res) {
+    async pegarTodosPacientes(_, res) {
+        console.log("cheguei aqui")
         try {
             const pacientes = await prismaClient.paciente.findMany();
+            return res.send({
+                pacientes
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    async pegarPacientePorId(req, res) {
+        try {
+            const pacientes = await prismaClient.paciente.findUnique({
+                where: {
+                    id: Number(req.params.id)
+                }
+            })
+            if (!pacientes) return res.status(404).send("Paciente não existe!")
             return res.json(pacientes)
         }
         catch (e) {
             console.log(e)
         }
     }
-    async getPacientePorId(req,res) {
-        const params = req
-        try {
-            const pacientes = await prismaClient.paciente.findUnique({
-                where: {
-                    id: Number(params.id)
-                }
-            })
-            if (!pacientes) return res.status(404).send("Paciente não existe!")
-            return response.json(pacientes)
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
-    async postPaciente(req, res) {
+
+    async criarPaciente(req, res) {
         try {
             const { body } = req
-            const bodyKeys = Object.keys(body)
+            const bodyKeys = Object.keys(body) // Aqui pegamos todas as chaves do objeto e é gerado um array de strings para a gente, com o formato de ["chave1", "chave2".....]
+            console.log(bodyKeys)
             for (const key of bodyKeys) {
                 if (key !== "nome" &&
                     key !== "cpf" &&
@@ -43,7 +48,7 @@ class PacienteController {
             const pacientes = await prismaClient.paciente.create({
                 data: {
                     ...body,
-                    data_nascimento: new Date(body.data_exame) // corrigir esse cara no put quando nao se manda ele... TO-DO
+                    data_nascimento: new Date(body.data_nascimento),
                 },
             })
             return res.status(201).json(pacientes)
@@ -54,7 +59,8 @@ class PacienteController {
             }
         }
     }
-    async putPaciente(req, res) {
+
+    async atualizarPaciente(req, res) {
         try {
             const { body, params } = req
             const bodyKeys = Object.keys(body)
@@ -79,24 +85,24 @@ class PacienteController {
                     id: Number(params.id)
                 }
             })
-    
+
             return res.status(201).json({
                 message: "Paciente atualizado!",
                 data: pacienteAtualizado
             })
-    
+
         } catch (error) {
             if (error.code == "P2025") {
-                res.status(404).send("Paciente não existe no banco")
+                res.status(404).send("Usuário não existe no banco")
             }
-    
             if (error.code === "P2002") {
-                res.status(404).send("Falha ao cadastrar paciente: Email já cadastrado!")
+                res.status(404).send("Falha ao cadastrar usuário: Email já cadastrado!")
             }
         }
     }
+
     async deletePaciente(req, res) {
-        const params = req
+        const { params } = req
         try {
             const pacienteDeletado = await prismaClient.paciente.delete({
                 where: {
@@ -111,8 +117,13 @@ class PacienteController {
             if (error.code == "P2025") {
                 res.status(404).send("Paciente não existe no banco")
             }
+            if (error.code == "P2003") {
+                res.status(404).send("Paciente não pode ser excluido, pois possui exames vinculados.")
+            }
+            res.status(500).send(error)
         }
     }
 }
 
-export const pacienteController = new PacienteController();
+export const pacienteController = new PacienteController()
+

@@ -11,7 +11,6 @@ class UsuarioController {
             console.log(e)
         }
     }
-
     async getUsuarioPorId(req, res) {
         try {
             const { params } = req
@@ -27,7 +26,6 @@ class UsuarioController {
             console.log(e)
         }
     }
-
     async criarUsuario(req, res) {
         try {
             const { body } = req

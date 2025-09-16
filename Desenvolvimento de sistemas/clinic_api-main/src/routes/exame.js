@@ -1,15 +1,10 @@
 import { Router } from "express";
-import { prismaClient } from '../../prisma/prisma.js';
 import { exameController } from "../controller/Exame/ExameController.js";
 
 export const exameRouter = Router()
 
-exameRouter.get('/exames', exameController.getTodosExames)
-
-exameRouter.get('/exames:id', exameController.getExamePorId)
-
-exameRouter.post('/exames', exameController.postExame)
-
-exameRouter.put('/exames:id', exameController.putExame)
-
-exameRouter.delete('/exames:id', exameController.deleteExame)
+exameRouter.get("/exames", exameController.pegarTodosExames)
+exameRouter.get("/exames/:id", exameController.pegarExamePorId)
+exameRouter.post("/exames", exameController.criarExame)
+exameRouter.put("/exames/:id", exameController.atualizarExame)
+exameRouter.delete("/exames/:id", exameController.deletarExame)
