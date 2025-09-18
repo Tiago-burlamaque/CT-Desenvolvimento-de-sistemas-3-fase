@@ -6,9 +6,7 @@ class PacienteController {
         console.log("cheguei aqui")
         try {
             const pacientes = await prismaClient.paciente.findMany();
-            return res.send({
-                pacientes
-            })
+            return res.json(pacientes)
         }
         catch (e) {
             console.log(e)
