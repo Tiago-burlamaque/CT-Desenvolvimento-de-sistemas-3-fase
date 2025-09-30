@@ -2,21 +2,21 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.usuario.createMany({
-    data: [
-      { nome:"Joao", 
-        email: "joao34@email.com", 
-        senha: "123",
-        cargo: "Médico"
-      },
-    ],
-  });
+  // await prisma.usuario.createMany({
+  //   data: [
+  //     { nome:"Joao", 
+  //       email: "joao34@email.com", 
+  //       senha: "123",
+  //       cargo: "Médico"
+  //     },
+  //   ],
+  // });
 
-  // await prisma.exame.createMany({
-  //   data: [{
+  await prisma.exame.createMany({
+    data: [{
 
-  //   }]
-  // })
+    }]
+  })
 
 
   // await prisma.paciente.create({
@@ -25,7 +25,7 @@ async function main() {
   //     sexo: "Masculino",
   //     data_nascimento: new Date("1980-12-11"),
   //     cpf: "958.521.251.65",
-  //     telefone: 952556232, 
+  //     telefone: 952556232,
   //     email: "joao@email.com",
   //     // Consulta: {
   //     //   create: [
