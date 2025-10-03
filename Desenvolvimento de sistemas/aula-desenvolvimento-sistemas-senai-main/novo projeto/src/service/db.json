@@ -3,17 +3,17 @@
         {
             "id": 1,
             "email": "tiago@gmail.com",
-            "password": 1234
+            "password": 12345678
         },
         {
             "id": 2,
             "email": "juliarampazi@gmail.com",
-            "password": 1234
+            "password": 123442025
         },
         {
             "id": 3,
             "email": "sammy@gmail.com",
-            "password": 1234
+            "password": 123484525
         }
     ]
 }
