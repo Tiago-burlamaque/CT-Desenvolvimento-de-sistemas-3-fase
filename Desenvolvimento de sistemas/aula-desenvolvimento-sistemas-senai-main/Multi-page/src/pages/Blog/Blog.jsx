@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import {Link } from 'react-router'
 
 
 const Blog = () => {
@@ -22,9 +22,8 @@ const Blog = () => {
               <img src={post.image} />
               <h2>{post.title}</h2>
               <p>Views: {post.views}</p>
-              <Link to={`/post/${post.id}`}
-              className='text-blue-500 underline'>
-                Leia mais
+              <Link to={`/post/${post.id}`} className='text-blue-500 underline'>
+                Leia Mais
               </Link>
             </div>
           ))

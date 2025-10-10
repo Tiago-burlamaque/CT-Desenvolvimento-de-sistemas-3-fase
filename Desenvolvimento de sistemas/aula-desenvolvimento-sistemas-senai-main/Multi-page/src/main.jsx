@@ -3,16 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 // import App from './App.jsx'
 
-  //react router
-  import { createBrowserRouter } from "react-router";
-  import { RouterProvider } from "react-router/dom";
-  import Home from './pages/Home/Home';
-  import Sobre from './pages/Sobre/Sobre';
-  import Main from './layout/Main/Main';
-  import Blog from './pages/Blog/Blog';
-  import { PostDetail } from './pages/Blog/PostDetail';
-  import { AuthProvider } from './context/AuthContext';
-  import Login from './pages/Login/Login';
+//react router
+import { createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
+import Home from './pages/Home/Home';
+import Sobre from './pages/Sobre/Sobre';
+import Main from './layout/Main/Main';
+import Blog from './pages/Blog/Blog';
+import PostDetail from './pages/Blog/PostDetail';
 
 
 const router = createBrowserRouter([
@@ -24,19 +22,20 @@ const router = createBrowserRouter([
       { path: "blog", element: <Blog /> },
       { path: "post/:id", element: <PostDetail /> }
     ]
-  },
-  {
-    path: "login",
-    element: <Login/>,
-  },
-
+  }
+  // {
+  //   path: "/",
+  //   element: <Home/>,
+  // },
+  // {
+  //   path:"sobre",
+  //   element:<Sobre/>
+  // }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <RouterProvider router={router} />
     {/* <App /> */}
   </StrictMode>,
 )
