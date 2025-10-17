@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "joao@email.com",
+      "password": "123456789"
+    },
+    {
+      "id": "2",
+      "email": "maria@email.com",
+      "password": "123456789"
+    },
+    {
+      "id": "cb2e",
+      "email": "luciano@email.com",
+      "password": "123456789"
+    },
+    {
+      "id": "058a",
+      "email": "luciano3@email.com",
+      "password": "123456789"
+    },
+    {
+      "id": "ef3c",
+      "email": "luciano20@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "0f02",
+      "email": "futlastf890@gmail.com",
+      "password": "futlast123"
+    }
+  ]
+}
